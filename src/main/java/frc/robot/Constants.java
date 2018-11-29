@@ -9,7 +9,7 @@ public class Constants {
     public static final int DRIVE_MIDDLE_LEFT_ID = 2;
     public static final int DRIVE_BACK_LEFT_ID = 3;
     public static final int DRIVE_FRONT_RIGHT_ID = 4;
-    
+
 
     //Stick Constants
     public static final Joystick MASTER = new Joystick(0);
