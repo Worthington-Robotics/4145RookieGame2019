@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
@@ -40,8 +39,7 @@ public class DriveTylerZupfer extends Subsystem {
     public static DriveTylerZupfer getInstance() {
         return m_DRIVE_TYLER_ZUPFER;
     }
-    private TalonSRX Frontleft, frontright, rearleft, rearright;
-    double zero = 0;
+    private TalonSRX Frontleft, frontright, rearleft, rearright
     private final Loop mloop = new Loop() {
         @Override
         public void onStart(double timestamp) {
@@ -61,7 +59,7 @@ public class DriveTylerZupfer extends Subsystem {
     };
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putNumber("Zero", zero);
+
     }
 
     @Override
