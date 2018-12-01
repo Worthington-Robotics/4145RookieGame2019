@@ -3,7 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="4145RookieGame2019_main" target="1.8" />
-      <module name="4145RookieGame2019_test" target="11" />
+      <module name="4145RookieGame2019_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
