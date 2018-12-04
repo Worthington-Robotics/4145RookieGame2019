@@ -13,10 +13,10 @@ public class TazDrive extends Subsystem {
     private TalonSRX frontLeft, frontRight, rearLeft, rearRight;
 
     public TazDrive() {
-        frontRight = new TalonSRX(1);
-        frontLeft = new TalonSRX(2);
-        rearRight = new TalonSRX(3);
-        rearLeft = new TalonSRX(4);
+        frontRight = new TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
+        frontLeft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
+        rearRight = new TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
+        rearLeft = new TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
     }
 
     private double leftSignal = 0, rightSignal = 0;
