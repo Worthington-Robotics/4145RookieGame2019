@@ -1,58 +1,21 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 
-public class DriveTemplate extends Subsystem {
+public class bingboy extends Subsystem{
 
-    private static final DriveTemplate m_instance = new DriveTemplate();
+    private static final bingboy m_instance = new bingboy();
 
-    private TalonSRX frontLeft, frontRight, rearLeft, rearRight;
-    private double leftSignal = 0, rightSignal = 0;
+    private TalonSRX backleft, backright, frontleft, frontright;
+    private double leftsignal = 0, rightsignal = 0;
 
-    public static DriveTemplate getInstance(){
+    public static bingboy getinstance() {
         return m_instance;
     }
-
-
-    private final Loop mloop = new Loop() {
-        @Override
-        public void onStart(double timestamp) {
-
-        }
-
-        @Override
-        public void onLoop(double timestamp) {
-            double [] operatorStick = HIDHelper.getAdjStick(Constants.MASTER_STICK);
-            DriveSignal motorOutput = arcadeDrive(operatorStick[1], operatorStick[0]);
-            leftSignal = motorOutput.getLeft();
-            rightSignal = motorOutput.getRight();
-        }
-
-        @Override
-        public void onStop(double timestamp) {
-
-        }
-    };
-
-
-    @Override
-    public void readPeriodicInputs() {
-
-    }
-
-    @Override
-    public void writePeriodicOutputs() {
-        frontRight.set(ControlMode.PercentOutput, rightSignal);
-        rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
-        frontLeft.set(ControlMode.PercentOutput, leftSignal);
-        rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
-    }
-
     private DriveSignal arcadeDrive(double xSpeed, double zRotation) {
         double leftMotorOutput;
         double rightMotorOutput;
@@ -81,18 +44,46 @@ public class DriveTemplate extends Subsystem {
         }
         return new DriveSignal(rightMotorOutput, leftMotorOutput);
     }
+    private final Loop bingLoop = new Loop() {
+        @Override
+        public void onStart(double timestamp) {
 
-    @Override
+        }
+
+        @Override
+        public void onLoop(double timestamp) {
+            double [] operatorStick = HIDHelper.getAdjStick(Constants.MASTER_STICK);
+            DriveSignal moterOutput = arcadeDrive(operatorStick[1], operatorStick[0]);
+            leftsignal = moterOutput.getLeft();
+            rightsignal = moterOutput.getRight();
+        }
+
+        @Override
+        public void onStop(double timestamp) {
+
+        }
+    };
+    @java.lang.Override
+    public void readPeriodicInputs() {
+
+    }
+
+    @java.lang.Override
+    public void writePeriodicOutputs() {
+
+    }
+
+    @java.lang.Override
     public void outputTelemetry() {
 
     }
 
-    @Override
+    @java.lang.Override
     public void stop() {
 
     }
 
-    @Override
+    @java.lang.Override
     public void reset() {
 
     }

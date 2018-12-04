@@ -6,20 +6,18 @@ import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
+public class exe extends Subsystem {
 
-public class DriveTemplate extends Subsystem {
+    private static final exe m_instance = new exe();
 
-    private static final DriveTemplate m_instance = new DriveTemplate();
-
-    private TalonSRX frontLeft, frontRight, rearLeft, rearRight;
+    private TalonSRX frontRight, frontLeft, rearRight, rearLeft;
     private double leftSignal = 0, rightSignal = 0;
 
-    public static DriveTemplate getInstance(){
-        return m_instance;
-    }
+    public static exe getInstance() { return m_instance; }
 
 
-    private final Loop mloop = new Loop() {
+    private final Loop mLoop = new Loop() {
+
         @Override
         public void onStart(double timestamp) {
 
@@ -38,20 +36,6 @@ public class DriveTemplate extends Subsystem {
 
         }
     };
-
-
-    @Override
-    public void readPeriodicInputs() {
-
-    }
-
-    @Override
-    public void writePeriodicOutputs() {
-        frontRight.set(ControlMode.PercentOutput, rightSignal);
-        rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
-        frontLeft.set(ControlMode.PercentOutput, leftSignal);
-        rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
-    }
 
     private DriveSignal arcadeDrive(double xSpeed, double zRotation) {
         double leftMotorOutput;
@@ -83,10 +67,23 @@ public class DriveTemplate extends Subsystem {
     }
 
     @Override
-    public void outputTelemetry() {
+    public void readPeriodicInputs() {
 
     }
 
+    @Override
+    public void writePeriodicOutputs() {
+        frontRight.set(ControlMode.PercentOutput, rightSignal);
+        rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
+        frontLeft.set(ControlMode.PercentOutput, leftSignal);
+        rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
+
+    }
+
+    @Override
+    public void outputTelemetry() {
+
+    }
     @Override
     public void stop() {
 
