@@ -7,19 +7,24 @@ import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 
-public class DriveTemplate extends Subsystem {
+public class TazDrive extends Subsystem {
 
     private static final DriveTemplate m_instance = new DriveTemplate();
-
     private TalonSRX frontLeft, frontRight, rearLeft, rearRight;
-    private double leftSignal = 0, rightSignal = 0;
 
+    public TazDrive() {
+        frontRight = new TalonSRX(1);
+        frontLeft = new TalonSRX(2);
+        rearRight = new TalonSRX(3);
+        rearLeft = new TalonSRX(4);
+    }
+
+    private double leftSignal = 0, rightSignal = 0;
     public static DriveTemplate getInstance(){
         return m_instance;
     }
 
-
-    private final Loop mloop = new Loop() {
+    private final Loop LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOP = new Loop() {
         @Override
         public void onStart(double timestamp) {
 
@@ -35,11 +40,9 @@ public class DriveTemplate extends Subsystem {
 
         @Override
         public void onStop(double timestamp) {
-
+        leftSignal = rightSignal = 0;
         }
     };
-
-
     @Override
     public void readPeriodicInputs() {
 
@@ -50,7 +53,7 @@ public class DriveTemplate extends Subsystem {
         frontRight.set(ControlMode.PercentOutput, rightSignal);
         rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
         frontLeft.set(ControlMode.PercentOutput, leftSignal);
-        rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
+        rearLeft.set(ControlMode.Follower, rearRight.getDeviceID());
     }
 
     private DriveSignal arcadeDrive(double xSpeed, double zRotation) {
@@ -94,6 +97,6 @@ public class DriveTemplate extends Subsystem {
 
     @Override
     public void reset() {
-
+        leftSignal = rightSignal = 0;
     }
 }
