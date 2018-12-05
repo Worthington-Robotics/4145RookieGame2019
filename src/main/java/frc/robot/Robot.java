@@ -7,11 +7,20 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.geometry.Pose2d;
+import frc.lib.loops.Looper;
+import frc.lib.util.DriveSignal;
+import frc.lib.util.LoggingSystem;
+import frc.robot.subsystems.TazDrive;
+
+import java.util.Arrays;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,6 +31,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
   public static OI m_oi;
+  private final SubsystemManager mSubsystemManager = new SubsystemManager(Arrays.asList(
+          TazDrive.getInstance()
+  ));
+  private Looper mEnabledLooper = new Looper();
+  private Looper mDisabledLooper = new Looper();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -90,8 +104,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-
-  }
+    mDisabledLooper.stop();
+    mEnabledLooper.start();
+    }
 
   /**
    * This function is called periodically during operator control.

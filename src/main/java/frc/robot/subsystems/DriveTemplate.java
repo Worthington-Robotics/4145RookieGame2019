@@ -6,7 +6,7 @@ import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
-
+/*
 public class DriveTemplate extends Subsystem {
 
     private static final DriveTemplate m_instance = new DriveTemplate();
@@ -97,3 +97,4 @@ public class DriveTemplate extends Subsystem {
 
     }
 }
+*/
