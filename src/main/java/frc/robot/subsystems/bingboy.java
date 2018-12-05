@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.sun.org.apache.bcel.internal.Const;
 import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
@@ -15,6 +17,13 @@ public class bingboy extends Subsystem{
 
     public static bingboy getinstance() {
         return m_instance;
+    }
+    public bingboy ()
+    {
+        frontright = new TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
+        frontleft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
+        backright = new TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
+        backleft = new TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
     }
     private DriveSignal arcadeDrive(double xSpeed, double zRotation) {
         double leftMotorOutput;
@@ -70,7 +79,10 @@ public class bingboy extends Subsystem{
 
     @java.lang.Override
     public void writePeriodicOutputs() {
-
+        frontleft.set(ControlMode.PercentOutput, leftsignal);
+        backleft.set(ControlMode.Follower, frontleft.getDeviceID());
+        frontright.set(ControlMode.PercentOutput, rightsignal);
+        backright.set(ControlMode.Follower, frontright.getDeviceID());
     }
 
     @java.lang.Override
