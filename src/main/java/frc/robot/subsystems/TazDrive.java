@@ -9,7 +9,7 @@ import frc.robot.Constants;
 
 public class TazDrive extends Subsystem {
 
-    private static final TazDrive m_instance = new TazDrive();
+    private static final TazDrive m_instance = null;
     private TalonSRX frontLeft, frontRight, rearLeft, rearRight;
 
     public TazDrive() {
