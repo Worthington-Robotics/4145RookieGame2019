@@ -23,6 +23,8 @@ public class ASmithDrive extends Subsystem {
         frontright = new TalonSRX(4);
         rearleft = new TalonSRX(3);
         rearright = new TalonSRX(2);
+        ///rearleft.setInverted(true);
+        ///frontleft.setInverted(true);
 
     }
 
