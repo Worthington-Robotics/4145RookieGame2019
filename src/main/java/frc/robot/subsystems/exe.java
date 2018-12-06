@@ -6,17 +6,22 @@ import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
-/*
+
 public class exe extends Subsystem {
 
-    private static final exe m_instance = new exe();
+    private static final exe m_instance = null;
 
     private TalonSRX frontRight, frontLeft, rearRight, rearLeft;
     private double leftSignal = 0, rightSignal = 0;
 
     public static exe getInstance() { return m_instance; }
 
-
+    public exe () {
+        frontLeft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
+        frontRight = new TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
+        rearLeft = new TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
+        rearRight = new TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
+    }
     private final Loop mLoop = new Loop() {
 
         @Override
@@ -95,4 +100,3 @@ public class exe extends Subsystem {
 
     }
 }
-*/
