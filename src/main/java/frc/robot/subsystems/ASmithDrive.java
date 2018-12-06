@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.lib.loops.Loop;
@@ -9,12 +10,12 @@ import frc.robot.Constants;
 
 public class ASmithDrive extends Subsystem {
 
-    private static final DriveTemplate m_instance = new DriveTemplate();
+    private static final ASmithDrive m_instance = null;
 
     private TalonSRX frontleft, frontright, rearleft, rearright;
     private double leftSignal = 0, rightSignal = 0;
 
-    public static DriveTemplate getInstance() {return m_instance;}
+    public static ASmithDrive getInstance() {return m_instance;}
 
     public ASmithDrive(){
 
