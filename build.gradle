@@ -1,7 +1,25 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.3'
+        classpath 'gov.nist.math:jama:1.0.3'
+    }
+}
+
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2019.0.0-alpha-3"
 }
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+
 
 def ROBOT_CLASS = "frc.robot.Robot"
 
@@ -32,6 +50,9 @@ dependencies {
     compile wpilib()
     compile ctre()
     compile navx()
+    compile("gov.nist.math:jama:1.0.3")
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.0.3")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.3")
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
