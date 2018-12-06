@@ -6,9 +6,8 @@ import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
-/*
 public class MJBDrive extends Subsystem {
-    private static final MJBDrive m_instance = new MJBDrive();
+    private static final MJBDrive m_instance = null; //new MJBDrive();
 
     private TalonSRX frontleft, frontright, rearleft, rearright;
     private double leftSignal = 0, rightSignal = 0;
@@ -103,4 +102,3 @@ public class MJBDrive extends Subsystem {
 
     }
 }
-*/
