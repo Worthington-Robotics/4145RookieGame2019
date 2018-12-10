@@ -2,22 +2,31 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 public class DriveTemplate extends Subsystem {
 
+    //the global instance used to access all methods below
     private static final DriveTemplate m_instance = null; // new DriveTemplate();
 
+    //motor controllers and other IO related to the subsystem
     private TalonSRX frontLeft, frontRight, rearLeft, rearRight;
+
+    //data objects / variables used for computations
     private double leftSignal = 0, rightSignal = 0;
 
+    //allows outside classes like subsystem manager to access this class
     public static DriveTemplate getInstance(){
         return m_instance;
     }
 
-    public DriveTemplate(){
+    //private constructor means the object can only be created inside the class
+    //before you can do anything with the cookie jar, you must actually create it
+    // the constructor creates the cookie jar in this case
+    private DriveTemplate(){
         frontRight = new TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
         frontLeft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
         rearRight = new TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
@@ -33,6 +42,8 @@ public class DriveTemplate extends Subsystem {
 
         }
 
+        //runs approximately every 20 milliseconds
+        //used for calculations after retrieving inputs from sensors
         @Override
         public void onLoop(double timestamp) {
             double [] operatorStick = HIDHelper.getAdjStick(Constants.MASTER_STICK);
@@ -47,12 +58,15 @@ public class DriveTemplate extends Subsystem {
         }
     };
 
-
+    //does what it says
+    //reads inputs from sensors before running the onLoop method above
     @Override
     public void readPeriodicInputs() {
 
     }
 
+    //does what it says
+    //designed for writing outputs to actuators in an orderly manner
     @Override
     public void writePeriodicOutputs() {
         frontRight.set(ControlMode.PercentOutput, rightSignal);
@@ -90,6 +104,13 @@ public class DriveTemplate extends Subsystem {
         return new DriveSignal(rightMotorOutput, leftMotorOutput);
     }
 
+    //method allowing access to set the drive values for autonomous
+    public void setDrive(double left, double right){
+        rightSignal = right;
+        leftSignal = left;
+    }
+
+    //smartdashboard prints go here
     @Override
     public void outputTelemetry() {
 
@@ -97,11 +118,20 @@ public class DriveTemplate extends Subsystem {
 
     @Override
     public void stop() {
-
+        //no real operations happen here
+        //technically for the robot when shutting down
     }
 
+    //when the robot is told to reset, this method is called
+    //useful for resetting sensors and internal variables
     @Override
     public void reset() {
 
+    }
+
+    //allows the subsystem manager to control this subsystem
+    @Override
+    public void registerEnabledLoops(ILooper enabledLooper) {
+        enabledLooper.register(mloop);
     }
 }

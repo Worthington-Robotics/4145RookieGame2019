@@ -32,11 +32,22 @@ public class ActionGroup {
         group.forEach(action -> action.onLoop());
     }
 
-    public boolean isFinnished() {
+    public boolean isFinished() {
+        //enforces state timeout
         if (t_Start + t_Timeout <= Timer.getFPGATimestamp()) return true;
+
+        //check each action individually to see if it is complete
         boolean temp = true;
         for (Action action : group) {
-            temp &= action.isFinished();
+            if(action.isFinished()) {
+                //allows actions that have self completed
+                //to finish when ready, not when the state is ready
+                action.onStop();
+            }
+            else{
+                //one or more actions is not finished so the state is not complete
+                temp = false;
+            }
         }
         return temp;
     }
