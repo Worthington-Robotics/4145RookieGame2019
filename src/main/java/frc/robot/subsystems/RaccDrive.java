@@ -8,7 +8,7 @@ import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 
 public class RaccDrive extends Subsystem {
-private static final RaccDrive r_instance = new RaccDrive();
+private static final RaccDrive r_instance = null;
 
 private TalonSRX fR, fL, rR, rL;
 private double leftSignal = 0, rightSignal = 0;

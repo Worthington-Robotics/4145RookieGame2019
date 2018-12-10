@@ -6,10 +6,9 @@ import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
  import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
-/*
-    public class meineke_Drive extends Subsystem
-    {
-        private static final meineke_Drive m_instance = new meineke_Drive();
+
+public class meineke_Drive extends Subsystem {
+    private static final meineke_Drive m_instance = null;
     private TalonSRX topLeft, topRight, backLeft, backRight;
     private double leftSignal = 0, rightSignal = 0;
 
@@ -103,4 +102,3 @@ import frc.robot.Constants;
         return new DriveSignal(rightMotorOutput, leftMotorOutput);
     }
 }
-*/

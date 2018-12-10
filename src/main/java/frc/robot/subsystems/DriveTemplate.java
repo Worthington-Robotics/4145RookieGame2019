@@ -6,16 +6,24 @@ import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
-/*
 public class DriveTemplate extends Subsystem {
 
-    private static final DriveTemplate m_instance = new DriveTemplate();
+    private static final DriveTemplate m_instance = null; // new DriveTemplate();
 
     private TalonSRX frontLeft, frontRight, rearLeft, rearRight;
     private double leftSignal = 0, rightSignal = 0;
 
     public static DriveTemplate getInstance(){
         return m_instance;
+    }
+
+    public DriveTemplate(){
+        frontRight = new TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
+        frontLeft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
+        rearRight = new TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
+        rearLeft = new TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
+        frontLeft.setInverted(true);
+        rearLeft.setInverted(true);
     }
 
 
@@ -97,4 +105,3 @@ public class DriveTemplate extends Subsystem {
 
     }
 }
-*/

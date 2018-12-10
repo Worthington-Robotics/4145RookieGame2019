@@ -7,10 +7,10 @@ import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
-/*
+
 public class bingboy extends Subsystem{
 
-    private static final bingboy m_instance = new bingboy();
+    private static final bingboy m_instance = null;
 
     private TalonSRX backleft, backright, frontleft, frontright;
     private double leftsignal = 0, rightsignal = 0;
@@ -100,4 +100,4 @@ public class bingboy extends Subsystem{
 
     }
 }
-*/
+
