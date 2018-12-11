@@ -85,6 +85,11 @@ public class TazDrive extends Subsystem {
         return new DriveSignal(rightMotorOutput, leftMotorOutput);
     }
 
+    public void setDrive(double left, double right){
+        rightSignal = right;
+        leftSignal = left;
+    }
+
     @Override
     public void outputTelemetry() {
 
