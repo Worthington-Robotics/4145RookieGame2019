@@ -18,6 +18,8 @@ public class Constants {
     public static final int LEFT_SHOOTER_ID = 2;
     public static final int RIGHT_SHOOTER_ID = 3;
     public static final int FORKSUD_ID = 4;
+    public static final int LIFT_1_ID = 5;
+    public static final int LIFT_2_ID = 6;
 
     //Encoder Ports
     public static final int LOWER_LIFT_ENCODER_A = 5;
