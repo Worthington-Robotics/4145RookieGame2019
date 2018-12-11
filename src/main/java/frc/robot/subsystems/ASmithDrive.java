@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
@@ -23,8 +24,8 @@ public class ASmithDrive extends Subsystem {
         frontright = new TalonSRX(4);
         rearleft = new TalonSRX(3);
         rearright = new TalonSRX(2);
-        ///rearleft.setInverted(true);
-        ///frontleft.setInverted(true);
+        rearleft.setInverted(true);
+        frontleft.setInverted(true);
 
     }
 
@@ -103,6 +104,10 @@ public class ASmithDrive extends Subsystem {
     @Override
     public void reset() {
 
+    }
+    @Override
+    public void registerEnabledLoops(ILooper enabledLooper) {
+        enabledLooper.register(mloop);
     }
 
 }
