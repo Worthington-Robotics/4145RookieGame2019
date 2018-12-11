@@ -16,7 +16,8 @@ public class ForksE extends Subsystem {
     }
 
     public ForksE() {
-        LeftMotor = new TalonSRX(Constants.);
+        LeftMotor = new TalonSRX(Constants.FORKS_LEFT_ID;
+        RightMotor = new TalonSRX(Constants.FORKS_RIGHT_ID);
     }
 
 
