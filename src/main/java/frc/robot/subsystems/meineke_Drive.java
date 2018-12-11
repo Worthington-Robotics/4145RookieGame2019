@@ -7,10 +7,19 @@ import frc.lib.util.DriveSignal;
  import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 
-public class meineke_Drive extends Subsystem {
+public class meineke_Drive extends Subsystem
+{
     private static final meineke_Drive m_instance = null;
-    private TalonSRX topLeft, topRight, backLeft, backRight;
+    private TalonSRX frontLeft, frontRight, backLeft, backRight;
     private double leftSignal = 0, rightSignal = 0;
+
+    public meineke_Drive()
+    {
+        frontLeft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
+        frontRight = new TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
+        backLeft = new TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
+        backRight = new TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
+    }
 
     public static meineke_Drive getInstance()
     {
@@ -51,10 +60,10 @@ public class meineke_Drive extends Subsystem {
 
     public void writePeriodicOutputs()
     {
-        topRight.set(ControlMode.PercentOutput, rightSignal);
-        backRight.set(ControlMode.Follower, topRight.getDeviceID());
-        topLeft.set(ControlMode.PercentOutput, leftSignal);
-        backLeft.set(ControlMode.Follower, topLeft.getDeviceID());
+        frontRight.set(ControlMode.PercentOutput, rightSignal);
+        backRight.set(ControlMode.Follower, frontRight.getDeviceID());
+        frontLeft.set(ControlMode.PercentOutput, leftSignal);
+        backLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
     }
 
     @Override
@@ -101,4 +110,11 @@ public class meineke_Drive extends Subsystem {
         }
         return new DriveSignal(rightMotorOutput, leftMotorOutput);
     }
+
+    public void setDrive(double left, double right)
+    {
+        leftSignal = left;
+        rightSignal = right;
+    }
+
 }
