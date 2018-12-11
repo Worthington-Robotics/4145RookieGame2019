@@ -11,11 +11,11 @@ public class ASmithDriveAction extends Action {
     private double leftPower, rightPower;
 
     public ASmithDriveAction(double leftPower, double rightPower){
-        if(leftPower > 1 && leftPower <= 10){
+        if(leftPower > 1 && leftPower <= 10 || rightPower > 1 && rightPower <= 10){
             leftPower /= 10;
             rightPower /= 10;
         }
-        if(leftPower > 10 && leftPower <= 100){
+        if(leftPower > 10 && leftPower <= 100 || rightPower > 10 && rightPower <= 100){
             leftPower /= 100;
             rightPower /= 100;
         }
