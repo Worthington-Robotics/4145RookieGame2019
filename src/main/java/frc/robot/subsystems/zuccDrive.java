@@ -97,5 +97,10 @@ public class zuccDrive extends Subsystem {
         }
         return new DriveSignal(rightMotorOutput, leftMotorOutput);
     }
+
+    public void setDrive(double leftPower, double rightPower) {
+        leftsignal = leftPower;
+                rightsignal = rightPower;
+    }
 }
 
