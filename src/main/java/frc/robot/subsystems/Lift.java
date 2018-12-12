@@ -16,6 +16,8 @@ public class Lift extends Subsystem{
     public Lift () {
         lift1 = new Spark(Constants.LIFT_1_ID);
         lift2 = new Spark(Constants.LIFT_2_ID);
+        lowerLimit = new DigitalInput(Constants.LOWER_LIFT_LIMIT);
+        upperLimit = new DigitalInput(Constants.UPPER_LIFT_LIMIT);
     }
 
     private final Loop liftloop;
@@ -39,6 +41,9 @@ public class Lift extends Subsystem{
 
             }
         };
+    }
+    private void setElevatorpower(double newpower){
+        elevatorpower = newpower;
     }
 
     @Override
