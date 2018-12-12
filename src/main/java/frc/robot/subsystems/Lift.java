@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Spark;
 import frc.lib.loops.Loop;
 import frc.lib.util.HIDHelper;
@@ -32,8 +34,11 @@ public class Lift extends Subsystem{
 
             @Override
             public void onLoop(double timestamp) {
-                double[] liftStick = HIDHelper.getAdjStick(Constants.SECOND_STICK);
-                elevatorpower = liftStick[0];
+                if(DriverStation.getInstance().isOperatorControl()){
+                    elevatorpower = HIDHelper.getAdjStick(Constants.SECOND_STICK)[0];
+                }
+                elevatorpower = (lowerLimit.get() && elevatorpower < 0) ? 0 : elevatorpower;
+                elevatorpower = (upperLimit.get() && elevatorpower > 0) ? 0 : elevatorpower;
             }
 
             @Override
