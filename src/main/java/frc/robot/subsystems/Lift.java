@@ -29,31 +29,28 @@ public class Lift extends Subsystem{
 
     }
 
-    private final Loop liftloop;
+    private final Loop liftloop = new Loop() {
 
-    {
-        liftloop = new Loop() {
+        @Override
+        public void onStart(double timestamp) {
 
-            @Override
-            public void onStart(double timestamp) {
+        }
 
+        @Override
+        public void onLoop(double timestamp) {
+            if(DriverStation.getInstance().isOperatorControl()){
+                elevatorpower = HIDHelper.getAdjStick(Constants.SECOND_STICK)[0];
             }
+            elevatorpower = (lowerLimit.get() && elevatorpower < 0) ? 0 : elevatorpower;
+            elevatorpower = (upperLimit.get() && elevatorpower > 0) ? 0 : elevatorpower;
+        }
 
-            @Override
-            public void onLoop(double timestamp) {
-                if(DriverStation.getInstance().isOperatorControl()){
-                    elevatorpower = HIDHelper.getAdjStick(Constants.SECOND_STICK)[0];
-                }
-                elevatorpower = (lowerLimit.get() && elevatorpower < 0) ? 0 : elevatorpower;
-                elevatorpower = (upperLimit.get() && elevatorpower > 0) ? 0 : elevatorpower;
-            }
+        @Override
+        public void onStop(double timestamp) {
 
-            @Override
-            public void onStop(double timestamp) {
+        }
+    };
 
-            }
-        };
-    }
     private void setElevatorpower(double newpower){
         elevatorpower = newpower;
     }
