@@ -16,6 +16,13 @@ public class zuccDrive extends Subsystem {
     private TalonSRX frontleft, frontright, rearleft, rearright;
     private double leftsignal = 0, rightsignal = 0;
 
+    public zuccDrive (){
+        frontleft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
+        frontright = new TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
+        rearleft = new TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
+        rearright = new TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
+    }
+
     public static zuccDrive getInstance() {
         return ZucC;
     }
