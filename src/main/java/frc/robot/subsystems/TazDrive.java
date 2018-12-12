@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
@@ -32,10 +33,12 @@ public class TazDrive extends Subsystem {
 
         @Override
         public void onLoop(double timestamp) {
-            double [] operatorStick = HIDHelper.getAdjStick(Constants.MASTER_STICK);
-            DriveSignal motorOutput = arcadeDrive(operatorStick[1], operatorStick[0]);
-            leftSignal = motorOutput.getLeft();
-            rightSignal = motorOutput.getRight();
+            if  (DriverStation.getInstance().isOperatorControl()) {
+                double [] operatorStick = HIDHelper.getAdjStick(Constants.MASTER_STICK);
+                DriveSignal motorOutput = arcadeDrive(operatorStick[1], operatorStick[0]);
+                leftSignal = motorOutput.getLeft();
+                rightSignal = motorOutput.getRight();
+            }
         }
 
         @Override
