@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
@@ -98,6 +99,17 @@ public class bingboy extends Subsystem{
     @java.lang.Override
     public void reset() {
 
+    }
+
+    public void setdrive(double left, double right){
+        leftsignal=left;
+        rightsignal=right;
+    }
+
+
+    @Override
+    public void registerEnabledLoops(ILooper enabledLooper) {
+        enabledLooper.register(bingLoop);
     }
 }
 
