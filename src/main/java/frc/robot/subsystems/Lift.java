@@ -51,7 +51,7 @@ public class Lift extends Subsystem{
         }
     };
 
-    private void setElevatorpower(double newpower){
+    public void setElevatorpower(double newpower){
         elevatorpower = newpower;
     }
 
