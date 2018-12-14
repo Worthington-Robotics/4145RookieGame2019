@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
@@ -11,7 +12,7 @@ import frc.robot.Constants;
 public class DriveTemplate extends Subsystem {
 
     //the global instance used to access all methods below
-    private static final DriveTemplate m_instance = null; // new DriveTemplate();
+    private static final DriveTemplate m_instance = new DriveTemplate();
 
     //motor controllers and other IO related to the subsystem
     private TalonSRX frontLeft, frontRight, rearLeft, rearRight;
@@ -49,7 +50,7 @@ public class DriveTemplate extends Subsystem {
         public void onLoop(double timestamp) {
             if (DriverStation.getInstance().isOperatorControl()) {
                 double[] operatorStick = HIDHelper.getAdjStick(Constants.MASTER_STICK);
-                DriveSignal motorOutput = arcadeDrive(operatorStick[1], operatorStick[0]);
+                DriveSignal motorOutput = arcadeDrive(operatorStick[1], operatorStick[2]);
                 leftSignal = motorOutput.getLeft();
                 rightSignal = motorOutput.getRight();
             }
@@ -116,7 +117,8 @@ public class DriveTemplate extends Subsystem {
     //smartdashboard prints go here
     @Override
     public void outputTelemetry() {
-
+        SmartDashboard.putNumber("Left", leftSignal);
+        SmartDashboard.putNumber("Right", rightSignal);
     }
 
     @Override

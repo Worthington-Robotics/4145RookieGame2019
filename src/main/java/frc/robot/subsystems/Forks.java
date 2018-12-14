@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
+import frc.lib.loops.ILooper;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 
@@ -11,8 +12,8 @@ public class Forks extends Subsystem {
 
     private Forks() {
         periodic = new PeriodicIO();
-        leftMotor = new Spark(Constants.FORKS_LEFT_ID);
-        rightMotor = new Spark(Constants.FORKS_RIGHT_ID);
+        leftMotor = new Spark(Constants.LEFT_SHOOTER_ID);
+        rightMotor = new Spark(Constants.RIGHT_SHOOTER_ID);
     }
 
     public static Forks getInstance() {
@@ -25,7 +26,6 @@ public class Forks extends Subsystem {
 
     @Override
     public void readPeriodicInputs() {
-        double[] operatorstick = HIDHelper.getAdjStick(Constants.SECOND_STICK);
     }
 
     @Override
@@ -52,6 +52,5 @@ public class Forks extends Subsystem {
     public static class PeriodicIO {
         public double ShotPower = 0.0;
     }
-
 
 }

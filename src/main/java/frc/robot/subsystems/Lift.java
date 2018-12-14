@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
@@ -39,10 +41,10 @@ public class Lift extends Subsystem{
         @Override
         public void onLoop(double timestamp) {
             if(DriverStation.getInstance().isOperatorControl()){
-                elevatorpower = HIDHelper.getAdjStick(Constants.SECOND_STICK)[0];
+                elevatorpower = HIDHelper.getAdjStick(Constants.SECOND_STICK)[1];
             }
-            elevatorpower = (lowerLimit.get() && elevatorpower < 0) ? 0 : elevatorpower;
-            elevatorpower = (upperLimit.get() && elevatorpower > 0) ? 0 : elevatorpower;
+            //elevatorpower = (lowerLimit.get() && elevatorpower < 0) ? 0 : elevatorpower;
+            //elevatorpower = (upperLimit.get() && elevatorpower > 0) ? 0 : elevatorpower;
         }
 
         @Override
@@ -62,13 +64,15 @@ public class Lift extends Subsystem{
 
     @Override
     public void writePeriodicOutputs() {
-        lift1.set(elevatorpower);
-        lift2.set(elevatorpower);
+        lift1.set(-elevatorpower);
+        lift2.set(-elevatorpower);
     }
 
     @Override
     public void outputTelemetry() {
-
+        SmartDashboard.putNumber("Lift", elevatorpower);
+        SmartDashboard.putBoolean("LowerLimit", lowerLimit.get());
+        SmartDashboard.putBoolean("UpperLimit", upperLimit.get());
     }
 
     @Override
@@ -79,5 +83,8 @@ public class Lift extends Subsystem{
     @Override
     public void reset() {
 
+    }
+    public void registerEnabledLoops(ILooper enabledLooper) {
+        enabledLooper.register(liftloop);
     }
 }
