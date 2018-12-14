@@ -14,6 +14,8 @@ public class SavageAuto extends StateMachineDescriptor {
         addParallel(new Action[]{new LiftAction(1), new DriveAction(.75, .75)},1000);
         addSequential(new DriveAction(.5, 0), 1000);
         addSequential(new DriveAction (.5,.5),1000 );
+        addSequential(new DriveAction(0,.5),1000);
+        addSequential(new DriveAction(.5,.5), 500);
         addSequential(new ForkAction(ForkAction.ShotPower.Shoot),1000);
 
 
