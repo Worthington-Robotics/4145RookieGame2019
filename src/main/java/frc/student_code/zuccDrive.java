@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.student_code;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -6,36 +6,42 @@ import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
-public class MJBDrive extends Subsystem {
-    private static final MJBDrive m_instance = new MJBDrive();
+import frc.robot.subsystems.Subsystem;
+
+public class zuccDrive extends Subsystem {
+
+
+    private static final zuccDrive ZucC = null; //new zuccDrive();
 
     private TalonSRX frontleft, frontright, rearleft, rearright;
-    private double leftSignal = 0, rightSignal = 0;
+    private double leftsignal = 0, rightsignal = 0;
 
-    public MJBDrive () {
+    public zuccDrive (){
         frontleft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
         frontright = new TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
         rearleft = new TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
         rearright = new TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
     }
 
-    public static MJBDrive getInstance(){
-        return m_instance;
+    public static zuccDrive getInstance() {
+        return ZucC;
     }
 
-
-    private final Loop miloloop = new Loop() {
+    private final Loop zuccloop = new Loop() {
         @Override
         public void onStart(double timestamp) {
 
+
         }
+
 
         @Override
         public void onLoop(double timestamp) {
             double [] operatorStick = HIDHelper.getAdjStick(Constants.MASTER_STICK);
             DriveSignal motorOutput = arcadeDrive(operatorStick[1], operatorStick[0]);
-            leftSignal = motorOutput.getLeft();
-            rightSignal = motorOutput.getRight();
+            leftsignal = motorOutput.getLeft();
+            rightsignal = motorOutput.getRight();
+
         }
 
         @Override
@@ -44,20 +50,32 @@ public class MJBDrive extends Subsystem {
         }
     };
 
-
     @Override
     public void readPeriodicInputs() {
-
     }
 
     @Override
     public void writePeriodicOutputs() {
-        frontright.set(ControlMode.PercentOutput, rightSignal);
-        rearright.set(ControlMode.Follower, frontright.getDeviceID());
-        frontleft.set(ControlMode.PercentOutput, leftSignal);
-        rearleft.set(ControlMode.Follower, frontleft.getDeviceID());
+    frontright.set(ControlMode.PercentOutput, rightsignal);
+    rearright.set(ControlMode.Follower, frontright.getDeviceID());
+    frontleft.set(ControlMode.PercentOutput, leftsignal);
+    rearleft.set(ControlMode.Follower, frontleft.getDeviceID());
     }
 
+    @Override
+    public void outputTelemetry() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public void reset() {
+
+    }
     private DriveSignal arcadeDrive(double xSpeed, double zRotation) {
         double leftMotorOutput;
         double rightMotorOutput;
@@ -87,18 +105,9 @@ public class MJBDrive extends Subsystem {
         return new DriveSignal(rightMotorOutput, leftMotorOutput);
     }
 
-    @Override
-    public void outputTelemetry() {
-
-    }
-
-    @Override
-    public void stop() {
-
-    }
-
-    @Override
-    public void reset() {
-
+    public void setDrive(double leftPower, double rightPower) {
+        leftsignal = leftPower;
+                rightsignal = rightPower;
     }
 }
+

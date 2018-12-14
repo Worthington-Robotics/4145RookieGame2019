@@ -1,7 +1,7 @@
-package frc.robot.actions;
+package frc.student_code;
 
 import frc.lib.statemachine.Action;
-import frc.robot.subsystems.ASmithDrive;
+import frc.student_code.ASmithDrive;
 
 public class ASmithDriveAction extends Action {
 

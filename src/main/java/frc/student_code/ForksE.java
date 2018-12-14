@@ -1,7 +1,8 @@
-package frc.robot.subsystems;
+package frc.student_code;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.Constants;
+import frc.robot.subsystems.Subsystem;
 
 public class ForksE extends Subsystem {
 
@@ -16,7 +17,7 @@ public class ForksE extends Subsystem {
     }
 
     public ForksE() {
-        LeftMotor = new TalonSRX(Constants.FORKS_LEFT_ID;
+        LeftMotor = new TalonSRX(Constants.FORKS_LEFT_ID);
         RightMotor = new TalonSRX(Constants.FORKS_RIGHT_ID);
     }
 
