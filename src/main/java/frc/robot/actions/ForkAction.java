@@ -4,10 +4,10 @@ import frc.lib.statemachine.Action;
 import frc.robot.Constants;
 import frc.robot.subsystems.Forks;
 
-public class Manipulator extends Action {
+public class ForkAction extends Action {
     private ShotPower speed;
 
-    public Manipulator(ShotPower Speed) {
+    public ForkAction(ShotPower Speed) {
         speed = Speed;
     }
 

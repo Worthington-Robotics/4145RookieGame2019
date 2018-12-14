@@ -11,7 +11,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.lib.statemachine.Action;
-import frc.robot.actions.Manipulator;
+import frc.robot.actions.ForkAction;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,8 +21,8 @@ public class OI {
     public OI() {
         Button second2 = new JoystickButton(Constants.SECOND, 2);
         Button second3 = new JoystickButton(Constants.SECOND, 3);
-        second2.whileHeld(Action.toCommand(new Manipulator(Manipulator.ShotPower.PickUp)));
-        second3.whileHeld(Action.toCommand(new Manipulator(Manipulator.ShotPower.Shoot)));
+        second2.whileHeld(Action.toCommand(new ForkAction(ForkAction.ShotPower.PickUp)));
+        second3.whileHeld(Action.toCommand(new ForkAction(ForkAction.ShotPower.Shoot)));
     }
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
