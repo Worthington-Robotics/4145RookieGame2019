@@ -3,11 +3,18 @@ package frc.robot.AutoModes;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachineDescriptor;
 import frc.robot.actions.ActionTemplate;
+import frc.robot.actions.DriveAction;
+import frc.robot.actions.ForkAction;
+import frc.robot.actions.LiftAction;
 import frc.robot.subsystems.Lift;
 
 public class TazAuto extends StateMachineDescriptor {
     public TazAuto(){
-        addSequential(new , 2000);
+        addSequential(new LiftAction(1), 1000);
+        addParallel(new Action [] {new ActionTemplate(1, 1), new LiftAction(1)} , 20000); // TODO Tune
+        addSequential(new DriveAction(1,0.5), 20000); //TODO Tune
+        addSequential(new DriveAction(1,1), 20000); //TODO Tune
+        addSequential(new ForkAction(ForkAction.ShotPower.Shoot),10000); // TODO Tune
 
         /*creates a single action state
         //useful for waiting on things to happen or doing single tasks
