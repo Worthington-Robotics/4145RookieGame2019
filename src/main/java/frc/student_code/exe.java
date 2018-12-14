@@ -1,41 +1,37 @@
-package frc.robot.subsystems;
-
+package frc.student_code;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
+import frc.robot.subsystems.Subsystem;
 
-public class ASmithDrive extends Subsystem {
+public class exe extends Subsystem {
 
-    private static final ASmithDrive m_instance = null;
+    private static final exe m_instance = null;
 
-    private TalonSRX frontleft, frontright, rearleft, rearright;
+    private TalonSRX frontRight, frontLeft, rearRight, rearLeft;
     private double leftSignal = 0, rightSignal = 0;
 
-    public static ASmithDrive getInstance() {return m_instance;}
+    public static exe getInstance() { return m_instance; }
 
-    public ASmithDrive(){
-
-        frontleft = new TalonSRX(1);
-        frontright = new TalonSRX(4);
-        rearleft = new TalonSRX(3);
-        rearright = new TalonSRX(2);
-        rearleft.setInverted(true);
-        frontleft.setInverted(true);
-
+    public exe () {
+        frontLeft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
+        frontRight = new TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
+        rearLeft = new TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
+        rearRight = new TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
     }
+    private final Loop mLoop = new Loop() {
 
-    private final Loop mloop = new Loop()   {
         @Override
         public void onStart(double timestamp) {
 
         }
+
         @Override
-        public void onLoop(double timestamp)    {
+        public void onLoop(double timestamp) {
             double [] operatorStick = HIDHelper.getAdjStick(Constants.MASTER_STICK);
             DriveSignal motorOutput = arcadeDrive(operatorStick[1], operatorStick[0]);
             leftSignal = motorOutput.getLeft();
@@ -43,24 +39,10 @@ public class ASmithDrive extends Subsystem {
         }
 
         @Override
-        public void onStop(double timestamp)    {
-            leftSignal = 0;
-            rightSignal =0;
+        public void onStop(double timestamp) {
+
         }
     };
-
-    @Override
-    public void readPeriodicInputs() {
-
-    }
-
-    @Override
-    public void writePeriodicOutputs() {
-        frontright.set(ControlMode.PercentOutput, rightSignal);
-        rearright.set(ControlMode.Follower, frontright.getDeviceID());
-        frontleft.set(ControlMode.PercentOutput, leftSignal);
-        rearleft.set(ControlMode.Follower, frontleft.getDeviceID());
-    }
 
     private DriveSignal arcadeDrive(double xSpeed, double zRotation) {
         double leftMotorOutput;
@@ -91,16 +73,24 @@ public class ASmithDrive extends Subsystem {
         return new DriveSignal(rightMotorOutput, leftMotorOutput);
     }
 
-    public void setDrive(double left, double right){
-        rightSignal = right;
-        leftSignal = left;
+    @Override
+    public void readPeriodicInputs() {
+
+    }
+
+    @Override
+    public void writePeriodicOutputs() {
+        frontRight.set(ControlMode.PercentOutput, rightSignal);
+        rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
+        frontLeft.set(ControlMode.PercentOutput, leftSignal);
+        rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
+
     }
 
     @Override
     public void outputTelemetry() {
 
     }
-
     @Override
     public void stop() {
 
@@ -110,9 +100,4 @@ public class ASmithDrive extends Subsystem {
     public void reset() {
 
     }
-    @Override
-    public void registerEnabledLoops(ILooper enabledLooper) {
-        enabledLooper.register(mloop);
-    }
-
 }

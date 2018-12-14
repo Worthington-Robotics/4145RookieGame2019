@@ -1,23 +1,19 @@
-package frc.robot.actions;
+package frc.student_code;
 
 import frc.lib.statemachine.Action;
-import frc.robot.subsystems.zuccDrive;
+import frc.student_code.TazDrive;
 
-public class aidanActionDrive extends Action {
-
-    private zuccDrive zucC = zuccDrive.getInstance();
-
+public class TazDriveAction extends Action {
+    private TazDrive driveInstance = TazDrive.getInstance();
     private double leftPower, rightPower;
-
-    public aidanActionDrive(double leftpower, double rightpower) {
+    public TazDriveAction(double leftpower, double rightpower){
         leftPower = leftpower;
         rightPower = rightpower;
     }
 
     @Override
     public void onStart() {
-            zucC.setDrive(leftPower, rightPower);
-
+        driveInstance.setDrive(leftPower, rightPower);
     }
 
     @Override
@@ -32,8 +28,6 @@ public class aidanActionDrive extends Action {
 
     @Override
     public void onStop() {
-        zucC.setDrive(0,0);
+        driveInstance.setDrive(0,0);
     }
-
-
 }

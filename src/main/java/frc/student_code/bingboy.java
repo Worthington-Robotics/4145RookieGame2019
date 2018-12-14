@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.student_code;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -7,8 +7,9 @@ import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
+import frc.robot.subsystems.Subsystem;
 
-public class bingboy extends Subsystem{
+public class bingboy extends Subsystem {
 
     private static final bingboy m_instance = null;
 

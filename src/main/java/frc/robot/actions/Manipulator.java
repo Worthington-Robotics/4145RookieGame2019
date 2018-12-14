@@ -7,7 +7,9 @@ import frc.robot.subsystems.Forks;
 public class Manipulator extends Action {
     private ShotPower speed;
 
-    public Manipulator(ShotPower Speed ) { speed = Speed; }
+    public Manipulator(ShotPower Speed) {
+        speed = Speed;
+    }
 
     public void onStart() {
         Forks.getInstance().setShotPower(speed.shotpower);
@@ -29,14 +31,15 @@ public class Manipulator extends Action {
         Forks.getInstance().setShotPower(ShotPower.Stop.shotpower);
 
     }
-        public enum ShotPower {
-            Shoot(Constants.SHOOT_POWER),
-            PickUp(Constants.PICKUP_POWER),
-            Stop(Constants.STOP_POWER);
-            private double shotpower;
 
-            ShotPower(double power){
-                shotpower = power;
-            }
+    public enum ShotPower {
+        Shoot(Constants.SHOOT_POWER),
+        PickUp(Constants.PICKUP_POWER),
+        Stop(Constants.STOP_POWER);
+        private double shotpower;
+
+        ShotPower(double power) {
+            shotpower = power;
         }
+    }
 }

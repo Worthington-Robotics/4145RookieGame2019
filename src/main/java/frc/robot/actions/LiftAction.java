@@ -3,12 +3,12 @@ package frc.robot.actions;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Lift;
 
-public class zuccLifts extends Action{
+public class LiftAction extends Action{
 
     private Lift instance = Lift.getInstance();
     private double liftpower;
 
-    public zuccLifts(double liftPower){
+    public LiftAction(double liftPower){
             liftpower=liftPower;
     }
 

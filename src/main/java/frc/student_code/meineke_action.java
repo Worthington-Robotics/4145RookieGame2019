@@ -1,7 +1,7 @@
-package frc.robot.actions;
+package frc.student_code;
 
 import frc.lib.statemachine.Action;
-import frc.robot.subsystems.meineke_Drive;
+import frc.student_code.meineke_Drive;
 
 public class meineke_action extends Action
 {

@@ -1,29 +1,32 @@
-package frc.robot.subsystems;
+package frc.student_code;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
+import frc.robot.subsystems.Subsystem;
 
-public class exe extends Subsystem {
+public class TazDrive extends Subsystem {
 
-    private static final exe m_instance = null;
+    private static final TazDrive m_instance = null;
+    private TalonSRX frontLeft, frontRight, rearLeft, rearRight;
 
-    private TalonSRX frontRight, frontLeft, rearRight, rearLeft;
-    private double leftSignal = 0, rightSignal = 0;
-
-    public static exe getInstance() { return m_instance; }
-
-    public exe () {
-        frontLeft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
+    public TazDrive() {
         frontRight = new TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
-        rearLeft = new TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
+        frontLeft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
         rearRight = new TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
+        rearLeft = new TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
     }
-    private final Loop mLoop = new Loop() {
 
+    private double leftSignal = 0, rightSignal = 0;
+    public static TazDrive getInstance(){
+        return m_instance;
+    }
+
+    private final Loop LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOP = new Loop() {
         @Override
         public void onStart(double timestamp) {
 
@@ -31,17 +34,31 @@ public class exe extends Subsystem {
 
         @Override
         public void onLoop(double timestamp) {
-            double [] operatorStick = HIDHelper.getAdjStick(Constants.MASTER_STICK);
-            DriveSignal motorOutput = arcadeDrive(operatorStick[1], operatorStick[0]);
-            leftSignal = motorOutput.getLeft();
-            rightSignal = motorOutput.getRight();
+            if  (DriverStation.getInstance().isOperatorControl()) {
+                double [] operatorStick = HIDHelper.getAdjStick(Constants.MASTER_STICK);
+                DriveSignal motorOutput = arcadeDrive(operatorStick[1], operatorStick[0]);
+                leftSignal = motorOutput.getLeft();
+                rightSignal = motorOutput.getRight();
+            }
         }
 
         @Override
         public void onStop(double timestamp) {
-
+        leftSignal = rightSignal = 0;
         }
     };
+    @Override
+    public void readPeriodicInputs() {
+
+    }
+
+    @Override
+    public void writePeriodicOutputs() {
+        frontRight.set(ControlMode.PercentOutput, rightSignal);
+        rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
+        frontLeft.set(ControlMode.PercentOutput, leftSignal);
+        rearLeft.set(ControlMode.Follower, rearRight.getDeviceID());
+    }
 
     private DriveSignal arcadeDrive(double xSpeed, double zRotation) {
         double leftMotorOutput;
@@ -72,24 +89,16 @@ public class exe extends Subsystem {
         return new DriveSignal(rightMotorOutput, leftMotorOutput);
     }
 
-    @Override
-    public void readPeriodicInputs() {
-
-    }
-
-    @Override
-    public void writePeriodicOutputs() {
-        frontRight.set(ControlMode.PercentOutput, rightSignal);
-        rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
-        frontLeft.set(ControlMode.PercentOutput, leftSignal);
-        rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
-
+    public void setDrive(double left, double right){
+        rightSignal = right;
+        leftSignal = left;
     }
 
     @Override
     public void outputTelemetry() {
 
     }
+
     @Override
     public void stop() {
 
@@ -97,6 +106,6 @@ public class exe extends Subsystem {
 
     @Override
     public void reset() {
-
+        leftSignal = rightSignal = 0;
     }
 }
