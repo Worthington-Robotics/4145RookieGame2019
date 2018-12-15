@@ -11,10 +11,10 @@ import frc.robot.subsystems.Lift;
 public class TazAuto extends StateMachineDescriptor {
     public TazAuto(){
         addSequential(new LiftAction(1), 1000);
-        addParallel(new Action [] {new ActionTemplate(1, 1), new LiftAction(1)} , 20000); // TODO Tune
-        addSequential(new DriveAction(1,0.5), 20000); //TODO Tune
-        addSequential(new DriveAction(1,1), 20000); //TODO Tune
-        addSequential(new ForkAction(ForkAction.ShotPower.Shoot),10000); // TODO Tune
+        addParallel(new Action [] {new ActionTemplate(1, 1), new LiftAction(1)} , 1000); // TODO Tune
+        addSequential(new DriveAction(.5,0), 2000); //TODO Tune
+        addSequential(new DriveAction(1,1), 2000); //TODO Tune
+        addSequential(new ForkAction(ForkAction.ShotPower.Shoot),1000); // TODO Tune
 
         /*creates a single action state
         //useful for waiting on things to happen or doing single tasks
