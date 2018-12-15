@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.lib.loops.Looper;
+import frc.lib.statemachine.StateMachine;
+import frc.robot.AutoModes.RaccAuto;
 import frc.robot.subsystems.DriveTemplate;
 import frc.robot.subsystems.Forks;
 import frc.robot.subsystems.Lift;
@@ -90,6 +92,7 @@ public class Robot extends TimedRobot {
     mDisabledLooper.stop();
     mEnabledLooper.start();
     // schedule the autonomous command (example)
+    StateMachine.runMan(new RaccAuto());
   }
   /**
    * This function is called periodically during autonomous.

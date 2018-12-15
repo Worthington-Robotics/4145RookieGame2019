@@ -17,8 +17,10 @@ public class Constants {
     public static final int LIFT_2_ID = 6;
 
     //Encoder Ports
-    public static final int UPPER_LIFT_LIMIT = 5;
-    public static final int LOWER_LIFT_LIMIT = 6;
+    public static final int UPPER_UPPER_LIMIT = 5;
+    public static final int UPPER_LOWER_LIMIT = 6;
+    public static final int LOWER_UPPER_LIMIT = 7;
+    public static final int LOWER_LOWER_LIMIT = 8;
 
     //Solenoid Ports
     public static final int TRANS_LOW_ID = 0;
@@ -50,7 +52,7 @@ public class Constants {
     public static final double SHOOT_POWER = 1;
     public static final double ROLLOUT_POWER = .9;
     public static final double DROP_POWER = .65;
-    public static final double PICKUP_POWER = -.75;
+    public static final double PICKUP_POWER = -.5;
     public static final double SLOWUP_POWER = -.65;
     public static final double STOP_POWER = 0;
 
@@ -72,6 +74,7 @@ public class Constants {
     public static final boolean ENABLE_MP_TEST_MODE = true; //enables motion profiling test across all modes
     public static final double MP_TEST_SPEED = 4;
     public static final boolean RAMPUP = !true;
+
 
     //Stick Constants
     public static final Joystick MASTER = new Joystick(0);

@@ -10,11 +10,10 @@ public class RaccAuto extends StateMachineDescriptor {
 
     public RaccAuto(){
 
-        addSequential(new DriveAction(0.25, 0.25),3750);
-        //addParallel(new Action[] {new DriveAction(0.25, 0.25),new LiftAction(0.75)}, 3910);
-        //addSequential(new ForkAction(ForkAction.ShotPower.Shoot), 500);
-        //addSequential(new ForkAction(ForkAction.ShotPower.Stop), 100);
-        //addParallel(new Action[] {new DriveAction(-0.25, -0.25),new LiftAction(-1)}, 1000);
+        addSequential(new DriveAction(0.40  , 0.35),5080);
+        addParallel(new Action[] {new DriveAction(0.25, 0.25),new LiftAction(0.75)}, 4010);
+        addSequential(new ForkAction(ForkAction.ShotPower.Shoot), 500);
+        //three right wheels on right tape line of blue square, flush against wall
 
     }
 }

@@ -15,15 +15,18 @@ public class Lift extends Subsystem{
 
     private Spark lift1, lift2;
 
-    private DigitalInput lowerLimit, upperLimit;
+    private DigitalInput lowerLimit, upperLimit, lowerupperlimit, lowerlowerlimit;
 
-    private double elevatorpower;
+    private double upperelevatorpower;
+    private double lowerelevatorpower;
 
     private Lift () {
         lift1 = new Spark(Constants.LIFT_1_ID);
         lift2 = new Spark(Constants.LIFT_2_ID);
-        lowerLimit = new DigitalInput(Constants.LOWER_LIFT_LIMIT);
-        upperLimit = new DigitalInput(Constants.UPPER_LIFT_LIMIT);
+        lowerLimit = new DigitalInput(Constants.UPPER_LOWER_LIMIT);
+        upperLimit = new DigitalInput(Constants.UPPER_UPPER_LIMIT);
+        lowerupperlimit = new DigitalInput(Constants.LOWER_UPPER_LIMIT);
+        lowerlowerlimit = new DigitalInput(Constants.LOWER_LOWER_LIMIT);
     }
 
     public static Lift getInstance() {
@@ -41,10 +44,16 @@ public class Lift extends Subsystem{
         @Override
         public void onLoop(double timestamp) {
             if(DriverStation.getInstance().isOperatorControl()){
-                elevatorpower = HIDHelper.getAdjStick(Constants.SECOND_STICK)[1];
+                upperelevatorpower = HIDHelper.getAdjStick(Constants.SECOND_STICK)[1];
             }
-            //elevatorpower = (lowerLimit.get() && elevatorpower < 0) ? 0 : elevatorpower;
-            //elevatorpower = (upperLimit.get() && elevatorpower > 0) ? 0 : elevatorpower;
+            upperelevatorpower = (lowerLimit.get() && upperelevatorpower < 0) ? 0 : upperelevatorpower;
+            upperelevatorpower = (upperLimit.get() && upperelevatorpower > 0) ? 0 : upperelevatorpower;
+
+            if(DriverStation.getInstance().isOperatorControl()){
+                lowerelevatorpower = HIDHelper.getAdjStick(Constants.SECOND_STICK)[1];
+            }
+            lowerelevatorpower = (lowerlowerlimit.get() && lowerelevatorpower < 0) ? 0 : lowerelevatorpower;
+            lowerelevatorpower = (lowerupperlimit.get() && lowerelevatorpower > 0) ? 0 : lowerelevatorpower;
         }
 
         @Override
@@ -54,7 +63,7 @@ public class Lift extends Subsystem{
     };
 
     public void setElevatorpower(double newpower){
-        elevatorpower = newpower;
+        upperelevatorpower = lowerelevatorpower = newpower;
     }
 
     @Override
@@ -64,15 +73,19 @@ public class Lift extends Subsystem{
 
     @Override
     public void writePeriodicOutputs() {
-        lift1.set(-elevatorpower);
-        lift2.set(-elevatorpower);
+        lift1.set(-upperelevatorpower);
+        lift2.set(-lowerelevatorpower);
     }
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putNumber("Lift", elevatorpower);
-        SmartDashboard.putBoolean("LowerLimit", lowerLimit.get());
-        SmartDashboard.putBoolean("UpperLimit", upperLimit.get());
+        SmartDashboard.putNumber("Lift 1", upperelevatorpower);
+        SmartDashboard.putBoolean("UpperLowerLimit", lowerLimit.get());
+        SmartDashboard.putBoolean("UpperUpperLimit", upperLimit.get());
+
+        SmartDashboard.putNumber("Lift 2", lowerelevatorpower);
+        SmartDashboard.putBoolean("LowerLowerLimit", lowerlowerlimit.get());
+        SmartDashboard.putBoolean("LowerUpperLimit", lowerupperlimit.get());
     }
 
     @Override

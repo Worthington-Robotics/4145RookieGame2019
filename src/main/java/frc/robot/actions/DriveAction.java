@@ -14,8 +14,8 @@ public class DriveAction extends Action {
 
     //action constructor. adding arguments allows for actions to be more versatile
     public DriveAction(double leftpower, double rightpower){
-        leftPower = leftpower;
-        rightPower = rightpower;
+        leftPower = -leftpower;
+        rightPower = -rightpower;
     }
 
     //method that runs when the action is started by the state machine
