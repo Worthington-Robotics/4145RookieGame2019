@@ -42,7 +42,7 @@ public class ActionGroup {
             if(action.isFinished()) {
                 //allows actions that have self completed
                 //to finish when ready, not when the state is ready
-                action.onStop();
+                action.doStop();
             }
             else{
                 //one or more actions is not finished so the state is not complete

@@ -7,18 +7,15 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.lib.geometry.Pose2d;
 import frc.lib.loops.Looper;
-import frc.lib.util.DriveSignal;
-import frc.lib.util.LoggingSystem;
-import frc.robot.subsystems.TazDrive;
+import frc.lib.statemachine.StateMachine;
+import frc.robot.AutoModes.RaccAuto;
+import frc.robot.subsystems.DriveTemplate;
+import frc.robot.subsystems.Forks;
+import frc.robot.subsystems.Lift;
+import frc.student_code.TazDrive;
 
 import java.util.Arrays;
 
@@ -32,7 +29,9 @@ import java.util.Arrays;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   private final SubsystemManager mSubsystemManager = new SubsystemManager(Arrays.asList(
-          TazDrive.getInstance()
+          DriveTemplate.getInstance(),
+          Lift.getInstance(),
+          Forks.getInstance()
   ));
   private Looper mEnabledLooper = new Looper();
   private Looper mDisabledLooper = new Looper();
@@ -44,6 +43,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
+    mSubsystemManager.registerEnabledLoops(mEnabledLooper);
+    mSubsystemManager.registerDisabledLoops(mDisabledLooper);
   }
 
   /**
@@ -56,6 +57,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    mSubsystemManager.outputTelemetry();
   }
 
   /**
@@ -65,6 +67,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    mDisabledLooper.start();
+    mEnabledLooper.stop();
   }
 
   @Override
@@ -85,14 +89,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
+    mDisabledLooper.stop();
+    mEnabledLooper.start();
     // schedule the autonomous command (example)
+    StateMachine.runMan(new RaccAuto());
   }
   /**
    * This function is called periodically during autonomous.

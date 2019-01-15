@@ -6,13 +6,9 @@ import frc.lib.util.HIDHelper;
 public class Constants {
     //Talon IDs
     public static final int DRIVE_FRONT_LEFT_ID = 1;
-    public static final int FORKS_LEFT_ID = 5;
     public static final int DRIVE_BACK_LEFT_ID = 2;
     public static final int DRIVE_FRONT_RIGHT_ID = 3;
-    public static final int FORKS_RIGHT_ID = 6;
     public static final int DRIVE_BACK_RIGHT_ID = 4;
-    public static final int LIFT_LOWER_ID = 7;
-    public static final int LIFT_UPPER_ID = 8;
 
     //Spark Ports
     public static final int LEFT_SHOOTER_ID = 2;
@@ -21,8 +17,10 @@ public class Constants {
     public static final int LIFT_2_ID = 6;
 
     //Encoder Ports
-    public static final int UPPER_LIFT_LIMIT = 5;
-    public static final int LOWER_LIFT_LIMIT = 6;
+    public static final int UPPER_UPPER_LIMIT = 5;
+    public static final int UPPER_LOWER_LIMIT = 6;
+    public static final int LOWER_UPPER_LIMIT = 7;
+    public static final int LOWER_LOWER_LIMIT = 8;
 
     //Solenoid Ports
     public static final int TRANS_LOW_ID = 0;
@@ -54,7 +52,7 @@ public class Constants {
     public static final double SHOOT_POWER = 1;
     public static final double ROLLOUT_POWER = .9;
     public static final double DROP_POWER = .65;
-    public static final double PICKUP_POWER = -.75;
+    public static final double PICKUP_POWER = -.5;
     public static final double SLOWUP_POWER = -.65;
     public static final double STOP_POWER = 0;
 
@@ -77,10 +75,11 @@ public class Constants {
     public static final double MP_TEST_SPEED = 4;
     public static final boolean RAMPUP = !true;
 
+
     //Stick Constants
     public static final Joystick MASTER = new Joystick(0);
     public static final Joystick SECOND = new Joystick(1);
-    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.15, 1.0, 1.0, 0.45, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 1.0, 1.0, 0.7, 2);
     public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.05, 1.0, 1.0, 1.0, 2);
 
     //Startup Constants
